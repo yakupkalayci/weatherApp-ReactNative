@@ -6,7 +6,7 @@ import Footer from "./footer/Footer"
 import styles from '../assets/styles/layout.style';
 
 interface ILayoutProps {
-    children: ReactElement
+    children: ReactElement;
 }
 
 function Layout(props:ILayoutProps):JSX.Element {
