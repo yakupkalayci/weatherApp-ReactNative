@@ -1,8 +1,14 @@
+// Import React
 import { ReactElement } from 'react';
 import {SafeAreaView, KeyboardAvoidingView} from 'react-native';
+
+// Header
 import Header from './header/Header';
+
+// Footer
 import Footer from "./footer/Footer"
 
+// styles
 import styles from '../assets/styles/layout.style';
 
 interface ILayoutProps {

@@ -1,15 +1,22 @@
+// Import React
 import { View, Text, Pressable } from 'react-native';
+
+// Import React Navigation
+import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { footerMenu } from '../../router/footerMenu';
+
+// Import Vector Icons
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
-import { useRoute } from '@react-navigation/native';
 
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// styles
 import styles from '../../assets/styles/footerMenu.style';
 
 function Footer(): JSX.Element {
+    // variables
     const insets = useSafeAreaInsets();
     const navigation = useNavigation();
     const route = useRoute();

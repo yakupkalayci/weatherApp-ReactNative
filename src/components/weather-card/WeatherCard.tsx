@@ -1,40 +1,47 @@
+// Import React
 import { Button, Text, TouchableOpacity, View, Image } from 'react-native';
+
+// Import Utils
+import { getCity } from '../../common/utils/getCity';
+
+// Import Api
+import { useGetWeatherByCityQuery } from '../../api/weather';
+
+// Import Vector Icons
 import Icon from 'react-native-vector-icons/Entypo'
 
+// styles
 import styles from '../../assets/styles/weatherCard.style';
 
 interface IWeatherCardProps {
-    city: string;
-    temp: number;
-    minTemp: number;
-    maxTemp: number;
-    humidity: number;
-    wind: number;
-    feelsLike: number;
+    cityName: string;
 }
 
 function WeatherCard(props:IWeatherCardProps):JSX.Element {
-
     // destruct props
-    const { city, temp, minTemp, maxTemp, humidity, wind, feelsLike } = props;
+    const { cityName } = props;
+
+    // Query Variables
+    const { data, error, isLoading } = useGetWeatherByCityQuery(getCity(cityName));
 
     return (
         <View style={styles.container}>
             <View style={styles.firstRow}>
-                <Text style={styles.bigText}>{city}</Text>
+                <Text style={styles.bigText}>{cityName}</Text>
                 <View >
                     <Image source={{uri: 'http://openweathermap.org/img/wn/02d@2x.png'}}/>
-                    <Text style={styles.bigText}>{temp}&deg;C</Text>
+                    <Text style={styles.bigText}>{data?.current.temp}&deg;C</Text>
+                    <Text style={styles.bigText}>{data?.current.weather[0].main}</Text>
                 </View>
             </View>
             <View style={styles.secondRow}>
                 <View>
-                    <Text>Min/Max: {minTemp}/{maxTemp}</Text>
-                    <Text>Humidity: %{humidity}</Text>  
+                    <Text>Min/Max: {data?.daily[0].temp.min}/{data?.daily[0].temp.max}</Text>
+                    <Text>Humidity: %{data?.current.humidity}</Text>  
                 </View>
                 <View>
-                    <Text>Wind: {wind}</Text>
-                    <Text>Feels Like: {feelsLike}</Text>
+                    <Text>Wind: {data?.current.wind_speed}</Text>
+                    <Text>Feels Like: {data?.current.feelsLike}</Text>
                 </View>
             </View>
             <View>

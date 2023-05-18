@@ -1,5 +1,7 @@
+// Import React
 import {View, Text, Pressable } from 'react-native';
 
+// styles
 import styles from '../../assets/styles/header.style';
 
 function Header():JSX.Element {
