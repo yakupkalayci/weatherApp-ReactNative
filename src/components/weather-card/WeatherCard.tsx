@@ -3,6 +3,7 @@ import { Button, Text, TouchableOpacity, View, Image } from 'react-native';
 
 // Import Utils
 import { getCity } from '../../common/utils/getCity';
+import { formatCityName } from '../../common/utils/formatCityName';
 
 // Import Api
 import { useGetWeatherByCityQuery } from '../../api/weather';
@@ -27,7 +28,7 @@ function WeatherCard(props:IWeatherCardProps):JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.firstRow}>
-                <Text style={styles.bigText}>{cityName}</Text>
+                <Text style={styles.bigText}>{formatCityName(cityName)}</Text>
                 <View >
                     <Image source={{uri: 'http://openweathermap.org/img/wn/02d@2x.png'}}/>
                     <Text style={styles.bigText}>{data?.current.temp}&deg;C</Text>
