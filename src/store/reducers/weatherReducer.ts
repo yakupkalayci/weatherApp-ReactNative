@@ -15,11 +15,11 @@ export const weatherSlice = createSlice({
     initialState,
     reducers: {
         changeCity: (state, action) => {
-            state.myCities.filter(item => item !== action.payload.oldCity);
-            state.myCities.push(action.payload.newCity);
+            const index = state.myCities.indexOf(action.payload.oldCity);
+            state.myCities[index] = action.payload.newCity;
         }
     }
 });
 
 export const { changeCity } = weatherSlice.actions;
-export default weatherSlice.reducer
+export default weatherSlice.reducer;

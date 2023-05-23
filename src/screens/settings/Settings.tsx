@@ -1,4 +1,5 @@
 // Import React
+import { useState } from "react";
 import { View, Text } from "react-native";
 
 // Import Constants
@@ -8,33 +9,45 @@ import { BASE_COLORS } from "../../common/constants/baseColors";
 
 // Import Components
 import Button from "../../components/cta/Button";
+import EditCitiesModal from "../../components/modal/EditCitiesModal";
 
 import styles from '../../assets/styles/settings.style';
 
 function Settings(): JSX.Element {
+
+    // states
+    const [editModal, setEditModal] = useState(false);
+
+    const toogleModal = () => {
+        setEditModal(!editModal);
+    }
+
     return (
         <View style={styles.container}>
-            <Button
-                bgColor={BASE_COLORS.black}
-                width={BUTTON_SİZE.medium}
-                textColor={BASE_COLORS.white}
-                text="Edit Home Page"
-                onPress={() => { }}
-            />
-            <Button 
-                bgColor={BASE_COLORS.red}
-                onPress={() => {}}
-                textColor={BASE_COLORS.white}
-                text="Change Lang"
-                width={BUTTON_SİZE.medium}
-            />
-            <Button 
-                bgColor={BASE_COLORS.blue}
-                onPress={() => {}}
-                textColor={BASE_COLORS.white}
-                text="Change Theme"
-                width={BUTTON_SİZE.medium}
-            />
+            <View style={styles.buttons}>
+                <Button
+                    bgColor={BASE_COLORS.black}
+                    width={BUTTON_SİZE.medium}
+                    textColor={BASE_COLORS.white}
+                    text="Edit Home Page"
+                    onPress={toogleModal}
+                />
+                <Button 
+                    bgColor={BASE_COLORS.red}
+                    onPress={() => {}}
+                    textColor={BASE_COLORS.white}
+                    text="Change Lang"
+                    width={BUTTON_SİZE.medium}
+                />
+                <Button 
+                    bgColor={BASE_COLORS.blue}
+                    onPress={() => {}}
+                    textColor={BASE_COLORS.white}
+                    text="Change Theme"
+                    width={BUTTON_SİZE.medium}
+                />
+            </View>
+            <EditCitiesModal visible={editModal} toogleModal={toogleModal}  />
         </View>
     )
 }
