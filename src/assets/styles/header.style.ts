@@ -5,6 +5,7 @@ export default StyleSheet.create({
         padding: 10,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
     },
     heading: {
         fontWeight: "900",
@@ -13,5 +14,9 @@ export default StyleSheet.create({
     subHeader: {
         paddingTop: 10,
         fontSize: 18
+    },
+    leftHeader: {
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })

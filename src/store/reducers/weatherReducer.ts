@@ -6,7 +6,7 @@ interface IInitalState {
     myCities: string[];
 }
 
-const initialState = {
+const initialState:IInitalState = {
     myCities: ['istanbul', 'ankara', 'izmir', 'bursa', 'antalya'],
 }
 
