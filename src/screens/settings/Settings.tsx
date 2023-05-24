@@ -1,15 +1,19 @@
 // Import React
 import { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Switch, Text } from "react-native";
 
 // Import Constants
 import { BUTTON_SİZE } from "../../common/constants/buttonSize";
 import { BASE_COLORS } from "../../common/constants/baseColors";
+import { CUSTOM_ICON_LIST } from "../../common/constants/icon/customIconList";
+import { CUSTOM_ICON_SIZES } from "../../common/constants/icon/iconSizes";
 
 
 // Import Components
 import Button from "../../components/cta/Button";
 import EditCitiesModal from "../../components/modal/EditCitiesModal";
+import CustomIcon from "../../components/icons/CustomIcon";
+import Icon from 'react-native-vector-icons/Entypo';
 
 import styles from '../../assets/styles/settings.style';
 
@@ -17,6 +21,8 @@ function Settings(): JSX.Element {
 
     // states
     const [editModal, setEditModal] = useState(false);
+    const [lang, setLang] = useState(false);
+    const [theme, setTheme] = useState(false);
 
     const toogleModal = () => {
         setEditModal(!editModal);
@@ -32,20 +38,21 @@ function Settings(): JSX.Element {
                     text="Edit Home Page"
                     onPress={toogleModal}
                 />
-                <Button 
-                    bgColor={BASE_COLORS.red}
-                    onPress={() => {}}
-                    textColor={BASE_COLORS.white}
-                    text="Change Lang"
-                    width={BUTTON_SİZE.medium}
-                />
-                <Button 
-                    bgColor={BASE_COLORS.blue}
-                    onPress={() => {}}
-                    textColor={BASE_COLORS.white}
-                    text="Change Theme"
-                    width={BUTTON_SİZE.medium}
-                />
+                <View style={styles.lang}>
+                    <CustomIcon name={CUSTOM_ICON_LIST.TR} size={CUSTOM_ICON_SIZES.LARGE} />
+                    <Switch 
+                        value={lang}
+                    />
+                    <CustomIcon name={CUSTOM_ICON_LIST.UK} size={CUSTOM_ICON_SIZES.LARGE} />
+
+                </View>
+                <View style={styles.lang}>
+                    <Icon name='light-down' size={30} />
+                    <Switch 
+                        value={theme}
+                    />
+                    <Icon name='light-up' size={30} />
+                </View>
             </View>
             <EditCitiesModal visible={editModal} toogleModal={toogleModal}  />
         </View>
