@@ -9,7 +9,7 @@ import styles from '../../assets/styles/button.style';
 
 interface IButtonProps {
     width: BUTTON_SİZE;
-    bgColor: BASE_COLORS;
+    bgColor: BASE_COLORS | string;
     textColor: BASE_COLORS;
     text: string;
     onPress: () => void;

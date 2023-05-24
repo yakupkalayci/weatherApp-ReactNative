@@ -19,7 +19,7 @@ function Header():JSX.Element {
                 <Text style={styles.subHeader}>eather</Text>
             </View>
             <View>
-                <Text>{route.name}</Text>
+                <Text style={{fontStyle: 'italic'}}>{route.name}</Text>
             </View>
         </View>
     )

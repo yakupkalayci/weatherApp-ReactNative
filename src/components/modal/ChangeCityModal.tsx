@@ -10,6 +10,10 @@ import Modal from "react-native-modal";
 
 // Import React-Native-Picker
 import { Picker } from "@react-native-community/picker";
+import { ItemValue } from "@react-native-community/picker/typings/Picker";
+
+// Import Utils
+import { showToast } from "../../common/utils/showToast";
 
 import styles from '../../assets/styles/changeCityModal.style';
 
@@ -26,9 +30,10 @@ function ChangeCityModal(props: IChangeCityModalProps): JSX.Element {
     // variables
     const dispatch = useAppDispatch();
 
-    const handlePicker = (itemValue) => {
-        dispatch(changeCity({oldCity:selectedValue, newCity:itemValue}))
-        setVisible(false)
+    const handlePicker = (itemValue:ItemValue) => {
+        dispatch(changeCity({oldCity:selectedValue, newCity:itemValue}));
+        setVisible(false);
+        showToast('Success', undefined, `You have changed ${selectedValue} to ${itemValue}`);
     }
 
     return (
