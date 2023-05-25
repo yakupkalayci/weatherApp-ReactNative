@@ -1,6 +1,6 @@
 // Import React
 import { useState } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 
 // Import Store
 import { useAppSelector } from '../../store/hooks';
@@ -103,11 +103,18 @@ function EditCitiesModal(props: IEditCitiesModalProps): JSX.Element {
     return (
         <Modal isVisible={visible} onBackdropPress={(toogleModal)} >
             <View style={styles.container}>
-                <View>
-                    <Text style={styles.modalHeading}>
-                        Edit Cities at the
-                    </Text>
-                    <Text style={styles.modalHeading}>Home Screen</Text>
+                <View style={styles.modalHeader}>
+                    <View>
+                        <Text style={styles.modalHeading}>
+                            Edit Cities at the
+                        </Text>
+                        <Text style={styles.modalHeading}>Home Screen</Text>
+                    </View>
+                    <TouchableOpacity onPress={() => toogleModal()}>
+                        <Text style={styles.closeBtn}>
+                            X
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.buttons}>
                     {

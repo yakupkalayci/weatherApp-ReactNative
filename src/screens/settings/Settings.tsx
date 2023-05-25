@@ -31,27 +31,35 @@ function Settings(): JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.buttons}>
-                <Button
-                    bgColor={BASE_COLORS.black}
-                    width={BUTTON_SİZE.medium}
-                    textColor={BASE_COLORS.white}
-                    text="Edit Home Page"
-                    onPress={toogleModal}
-                />
-                <View style={styles.lang}>
-                    <CustomIcon name={CUSTOM_ICON_LIST.TR} size={CUSTOM_ICON_SIZES.LARGE} />
-                    <Switch 
-                        value={lang}
-                    />
-                    <CustomIcon name={CUSTOM_ICON_LIST.UK} size={CUSTOM_ICON_SIZES.LARGE} />
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Language:</Text>
+                    <View style={styles.lang}>
+                        <CustomIcon name={CUSTOM_ICON_LIST.TR} size={CUSTOM_ICON_SIZES.LARGE} />
+                        <Switch 
+                            value={lang}
+                        />
+                        <CustomIcon name={CUSTOM_ICON_LIST.UK} size={CUSTOM_ICON_SIZES.LARGE} />
 
+                    </View>
                 </View>
-                <View style={styles.lang}>
-                    <Icon name='light-down' size={30} />
-                    <Switch 
-                        value={theme}
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Theme:</Text>
+                    <View style={styles.lang}>
+                        <Icon name='light-down' size={30} />
+                        <Switch 
+                            value={theme}
+                        />
+                        <Icon name='light-up' size={30} />
+                    </View>
+                </View>
+                <View style={styles.section}>
+                    <Button
+                        bgColor={BASE_COLORS.black}
+                        width={BUTTON_SİZE.medium}
+                        textColor={BASE_COLORS.white}
+                        text="Edit Home Page"
+                        onPress={toogleModal}
                     />
-                    <Icon name='light-up' size={30} />
                 </View>
             </View>
             <EditCitiesModal visible={editModal} toogleModal={toogleModal}  />

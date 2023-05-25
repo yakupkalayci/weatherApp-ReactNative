@@ -4,7 +4,7 @@ export default StyleSheet.create({
     container: {
         padding: 10,
         borderRadius: 10,
-        marginLeft: 20
+        marginLeft: 20,
     },
     text: {
         textAlign: 'center',

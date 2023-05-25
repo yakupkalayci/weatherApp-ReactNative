@@ -3,7 +3,8 @@ import React from 'react';
 
 // Import Store
 import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { store, persistor } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 // Import React Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,21 +21,23 @@ function App(): JSX.Element {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}}>
-          {
-            routes.map(({key, Component}) => (
-              <Stack.Screen name={key}>
-                 {() => (
-                  <Layout>
-                    <Component />
-                  </Layout>
-                 )}
-              </Stack.Screen>
-            ))
-          }
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PersistGate persistor={persistor} >
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerShown:false}}>
+            {
+              routes.map(({key, Component}) => (
+                <Stack.Screen name={key}>
+                  {() => (
+                    <Layout>
+                      <Component />
+                    </Layout>
+                  )}
+                </Stack.Screen>
+              ))
+            }
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 }

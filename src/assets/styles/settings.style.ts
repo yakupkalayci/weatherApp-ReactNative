@@ -11,9 +11,21 @@ export default StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
     },
+    section: {
+        width: Dimensions.get('window').width / 1.5,
+        alignItems: 'center',
+        borderBottomWidth: 2,
+        borderBottomColor: 'black',
+        paddingBottom: 30
+    },
     lang: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: Dimensions.get('window').width / 2.5,
+        width: '80%',
+    },
+    sectionTitle: {
+        alignSelf: 'flex-start',
+        fontStyle: 'italic',
+        paddingBottom: 25
     }
 });
