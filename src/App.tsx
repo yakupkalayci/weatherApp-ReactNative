@@ -26,7 +26,7 @@ function App(): JSX.Element {
           <Stack.Navigator screenOptions={{headerShown:false}}>
             {
               routes.map(({key, Component}) => (
-                <Stack.Screen name={key}>
+                <Stack.Screen name={key} key={key}>
                   {() => (
                     <Layout>
                       <Component />

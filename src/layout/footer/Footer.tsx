@@ -26,6 +26,7 @@ function Footer(): JSX.Element {
             {
                 footerMenu.map(item => (
                     <Pressable
+                        key={item.key}
                         style={styles.menuItemContainer}
                         onPress={() => { navigation.navigate(item.navigateKey) }}
                     >
@@ -33,6 +34,7 @@ function Footer(): JSX.Element {
                             item.navigateKey === 'home' ? <AntDesignIcon name={item.navigateKey} size={25} color='#fff' />
                                 : item.navigateKey === 'cities' ? <MaterialIcon name='location-city' size={25} color='#fff' />
                                     : item.navigateKey === 'settings' ? <FeatherIcon name={item.navigateKey} size={25} color='#fff' />
+                                        : item.navigateKey === 'location' ? <MaterialIcon name='location-on' size={25} color='#fff' />
                                         : null
                         }
                         <Text style={route.name === item.navigateKey ? [styles.menuItem, { fontWeight: 'bold' }] : styles.menuItem}>{item.title}</Text>

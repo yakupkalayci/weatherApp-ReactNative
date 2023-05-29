@@ -11,6 +11,11 @@ export const footerMenu = [
     },
     {
         key: 2,
+        title: 'Location',
+        navigateKey: 'location'
+    },
+    {
+        key: 3,
         title: 'Settings',
         navigateKey: 'settings'
     },

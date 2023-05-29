@@ -19,19 +19,10 @@ interface IButtonProps {
 function Button(props:IButtonProps):JSX.Element {
 
     // destruct props
-    const { width, bgColor, textColor, text, onPress, extraStyles } = props;
+    const { width, bgColor:backgroundColor, textColor:color, text, onPress, extraStyles } = props;
 
-    const extraStylesContainer = {
-        width: width,
-        backgroundColor: bgColor
-    }
-
-    const extraStylesText = {
-        color: textColor
-    }
-
-    const containerStyle = {...styles.container, ...extraStylesContainer, ...extraStyles};
-    const textStyle = {...styles.text, ...extraStylesText};
+    const containerStyle = {...styles.container, width, backgroundColor, ...extraStyles};
+    const textStyle = {...styles.text, color};
     
     return (
         <TouchableOpacity style={containerStyle} onPress={onPress}>

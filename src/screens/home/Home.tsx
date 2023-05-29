@@ -18,8 +18,8 @@ function Home():JSX.Element {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {
-                myCities?.map(city => (
-                    <WeatherCard cityName={city} />
+                myCities?.map((city, index) => (
+                    <WeatherCard key={index} cityName={city} />
                 ))
             }
         </ScrollView>
