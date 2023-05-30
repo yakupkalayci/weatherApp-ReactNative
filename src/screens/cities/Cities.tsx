@@ -1,5 +1,6 @@
 // Import React
-import { View, Text, FlatList } from "react-native";
+import { useState, useCallback } from "react";
+import { View, FlatList, RefreshControl } from "react-native";
 
 // Components
 import WeatherCard from "../../components/weather-card/WeatherCard";
@@ -12,13 +13,24 @@ import styles from '../../assets/styles/cities.style';
 
 function Cities(): JSX.Element {
 
+    // useState
+    const [refreshing, setRefreshing] = useState(false);
+
+    // refresh method
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }, []);
+
     return (
-        <View style={styles.container}>
-            <FlatList 
-                // contentContainerStyle={styles.secondContainer}
-                data={cities} 
-                renderItem={({ item }) => <WeatherCard cityName={item.name} />} 
-                keyExtractor={item => item.plaka.toString()} 
+        <View  style={styles.container}>
+            <FlatList
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                data={cities}
+                renderItem={({ item }) => <WeatherCard cityName={item.name} />}
+                keyExtractor={item => item.plaka.toString()}
             />
         </View>
     )

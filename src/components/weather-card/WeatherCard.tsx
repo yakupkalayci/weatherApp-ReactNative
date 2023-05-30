@@ -1,5 +1,5 @@
 // Import React
-import { Button, Text, TouchableOpacity, View, Image } from 'react-native';
+import { Text, TouchableOpacity, View, Image } from 'react-native';
 
 // Import React-Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -18,24 +18,40 @@ import Icon from 'react-native-vector-icons/Entypo'
 import styles from '../../assets/styles/weatherCard.style';
 
 interface IWeatherCardProps {
-    cityName: string;
+    cityName?: string;
+    cityCoord?: object;
+    extraName?: string;
 }
 
 function WeatherCard(props:IWeatherCardProps):JSX.Element {
     // destruct props
-    const { cityName } = props;
+    const { cityName, cityCoord, extraName } = props;
 
-    // Query Variables
-    const { data, error, isLoading } = useGetWeatherByCityQuery(getCity(cityName));
+    let exp;
+
+    if(cityName) {
+        exp = getCity(cityName);
+    }
+    else if(cityCoord) {
+        exp = cityCoord;        
+    }
 
     // Navigation Variables
     const navigation = useNavigation();
+
+    // Query Variables
+    const { data, error, isLoading } = useGetWeatherByCityQuery(exp);
+
+    // method for navigating to details screen
+    const navigatetoDetails = () => {
+        navigation.navigate('details', {city: formatCityName(cityName), data:data});
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.firstRow}>
                 <View style={styles.cityNameContainer}>
-                    <Text style={[styles.bigText, styles.cityName]}>{formatCityName(cityName)}  </Text>
+                    <Text style={[styles.bigText, styles.cityName]}>{cityName ? formatCityName(cityName) : extraName}  </Text>
                     <Text style={styles.bigText}>{parseInt(data?.current.temp)}&deg;</Text>
                 </View>
                 <View style={styles.weatherContainer}>
@@ -45,7 +61,7 @@ function WeatherCard(props:IWeatherCardProps):JSX.Element {
             </View>
             <View style={styles.secondRow}>
                 <View style={styles.detailRow}>
-                    <Text>Min/Max: {parseInt(data?.daily[0].temp.min)}&deg; / {parseInt(data?.daily[0].temp.max)}&deg;      </Text>
+                    <Text>Min/Max: {parseInt(data?.daily[0].temp.min)}&deg; / {parseInt(data?.daily[0].temp.max)}&deg;</Text>
                     <Text>Wind: {parseInt(data?.current.wind_speed) } km/h</Text>
                 </View>
                 <View style={styles.detailRow}>
@@ -54,7 +70,7 @@ function WeatherCard(props:IWeatherCardProps):JSX.Element {
                 </View>
             </View>
             <View>
-                <TouchableOpacity style={styles.details} onPress={() => navigation.navigate('details', {city: formatCityName(cityName), data:data})}>
+                <TouchableOpacity style={styles.details} onPress={navigatetoDetails}>
                     <Text style={styles.linkText}>Show more</Text>
                     <Icon name='arrow-long-right' size={20}  />
                 </TouchableOpacity>

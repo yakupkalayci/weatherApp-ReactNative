@@ -4,6 +4,7 @@ import Cities from "../screens/cities/Cities";
 import Settings from "../screens/settings/Settings";
 import MyLocation from "../screens/my-location/MyLocation";
 import WeatherDetails from "../screens/weather-details/WeatherDetails";
+import Map from "../screens/map/Map";
 
 export const routes = [
     {
@@ -30,5 +31,10 @@ export const routes = [
         key: 'details',
         label: 'Weather Details',
         Component: WeatherDetails
+    },
+    {
+        key: 'map',
+        label: 'Map',
+        Component: Map
     }
 ];
