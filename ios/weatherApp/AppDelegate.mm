@@ -1,5 +1,4 @@
 #import "AppDelegate.h"
-#import <GoogleMaps/GoogleMaps.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import "RNCConfig.h"

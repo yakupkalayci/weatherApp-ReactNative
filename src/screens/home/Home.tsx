@@ -1,6 +1,5 @@
 // Import Rect
-import { useState, useCallback } from "react";
-import { ScrollView, RefreshControl } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 
 // Import Redux
 import { useAppSelector } from "../../store/hooks";
@@ -13,22 +12,11 @@ import styles from '../../assets/styles/home.style';
 
 function Home():JSX.Element {
 
-    // useState
-    const [refreshing, setRefreshing] = useState(false);
-
-    // refresh method
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-        setTimeout(() => {
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
     // variables
     const myCities = useAppSelector(state => state.weather.myCities);
 
     return (
-        <ScrollView contentContainerStyle={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        <ScrollView contentContainerStyle={styles.container}>
             {
                 myCities?.map((city, index) => (
                     <WeatherCard key={index} cityName={city} />
