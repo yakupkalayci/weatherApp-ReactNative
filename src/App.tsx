@@ -16,17 +16,17 @@ import Layout from './layout/Layout';
 
 function App(): JSX.Element {
 
-  // Variables
+  // Navigation Variables
   const Stack = createNativeStackNavigator();
 
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} >
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown:false}}>
+          <Stack.Navigator screenOptions={{headerShown:true}}>
             {
-              routes.map(({key, Component}) => (
-                <Stack.Screen name={key} key={key}>
+              routes.map(({key, Component, showHeader}) => (
+                <Stack.Screen name={key} key={key} options={{headerShown: showHeader}} >
                   {() => (
                     <Layout>
                       <Component />

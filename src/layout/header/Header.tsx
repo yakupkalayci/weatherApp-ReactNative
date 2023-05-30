@@ -1,5 +1,5 @@
 // Import React
-import {View, Text, Pressable } from 'react-native';
+import { View, Text } from 'react-native';
 
 // Import React Navigation
 import { useRoute } from '@react-navigation/native';
@@ -7,7 +7,7 @@ import { useRoute } from '@react-navigation/native';
 // styles
 import styles from '../../assets/styles/header.style';
 
-function Header():JSX.Element {
+function Header(): JSX.Element {
 
     // variables
     const route = useRoute();
@@ -19,7 +19,7 @@ function Header():JSX.Element {
                 <Text style={styles.subHeader}>eather</Text>
             </View>
             <View>
-                <Text style={{fontStyle: 'italic'}}>{route.name}</Text>
+                <Text style={styles.routeName}>{route.name}</Text>
             </View>
         </View>
     )

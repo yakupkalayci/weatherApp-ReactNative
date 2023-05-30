@@ -10,31 +10,37 @@ export const routes = [
     {
         key: 'home',
         label: 'Home',
+        showHeader: false,
         Component: Home
     },
     {
         key: 'cities',
         label: 'Cities',
+        showHeader: false,
         Component: Cities
     },
     {
         key: 'settings',
         label: 'Settings',
+        showHeader: false,
         Component: Settings
     },
     {
         key: 'location',
         label: 'Location',
+        showHeader: false,
         Component: MyLocation
     },
     {
         key: 'details',
         label: 'Weather Details',
+        showHeader: true,
         Component: WeatherDetails
     },
     {
         key: 'map',
         label: 'Map',
+        showHeader: true,
         Component: Map
     }
 ];

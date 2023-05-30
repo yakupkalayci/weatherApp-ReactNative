@@ -18,5 +18,8 @@ export default StyleSheet.create({
     leftHeader: {
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    routeName: {
+        fontStyle: 'italic'
     }
 })
