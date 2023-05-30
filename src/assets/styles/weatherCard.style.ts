@@ -37,10 +37,11 @@ export default StyleSheet.create({
     cityNameContainer: {
         flexDirection: 'row', 
         justifyContent: 'center', 
-        alignItems: 'center'
+        alignItems: 'center',
     },
     cityName: {
-        color: '#000'
+        color: '#000',
+        paddingRight: 10
     },
     weatherContainer: {
         alignItems: 'center', 
