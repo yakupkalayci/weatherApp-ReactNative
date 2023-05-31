@@ -11,6 +11,7 @@ import { BUTTON_SİZE } from '../../common/constants/buttonSize';
 
 // Import Utils
 import { getRandomColor } from "../../common/utils/getRandomColor";
+import { translate } from '../../common/utils/translate';
 
 // Import React-Native-Modal
 import Modal from 'react-native-modal';
@@ -123,7 +124,7 @@ function EditCitiesModal(props: IEditCitiesModalProps): JSX.Element {
                                 key={city}
                                 bgColor={getRandomColor()}
                                 textColor={BASE_COLORS.white}
-                                text={`Change City ${index + 1}`}
+                                text={translate("COMPONENTS.BUTTON.TITLES.CHANGE_CITY") + index}
                                 onPress={() => { toogleModalVisible(index) }}
                                 width={BUTTON_SİZE.medium}
                                 extraStyles={{ marginBottom: 20 }}

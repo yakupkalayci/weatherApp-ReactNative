@@ -1,6 +1,9 @@
 // Import React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Switch, Text } from "react-native";
+
+// Import i18n
+import i18n from "../../common/locales/i18n";
 
 // Import Constants
 import { BUTTON_SİZE } from "../../common/constants/buttonSize";
@@ -8,6 +11,8 @@ import { BASE_COLORS } from "../../common/constants/baseColors";
 import { CUSTOM_ICON_LIST } from "../../common/constants/icon/customIconList";
 import { CUSTOM_ICON_SIZES } from "../../common/constants/icon/iconSizes";
 
+// Import Utils
+import { translate } from "../../common/utils/translate";
 
 // Import Components
 import Button from "../../components/cta/Button";
@@ -21,29 +26,42 @@ function Settings(): JSX.Element {
 
     // states
     const [editModal, setEditModal] = useState(false);
-    const [lang, setLang] = useState(false);
+    const [lang, setLang] = useState<boolean>();
     const [theme, setTheme] = useState(false);
 
+    // method for open and close EditCities Modal
     const toogleModal = () => {
         setEditModal(!editModal);
     }
+
+    // method for changing app language
+    const changeLang = () => setLang(prev => !prev);
+
+    useEffect(() => {
+        setLang(i18n.language === 'en');
+    }, []);
+
+    useEffect(() => {
+        i18n.changeLanguage(i18n.language === 'en' ? 'tr' : 'en');
+    }, [lang]);
 
     return (
         <View style={styles.container}>
             <View style={styles.buttons}>
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Language:</Text>
+                    <Text style={styles.sectionTitle}>{translate("PAGES.SETTINGS.SECTION_TITLES.LANGUAGE")}:</Text>
                     <View style={styles.lang}>
                         <CustomIcon name={CUSTOM_ICON_LIST.TR} size={CUSTOM_ICON_SIZES.LARGE} />
                         <Switch 
                             value={lang}
+                            onValueChange={() => changeLang()}
                         />
                         <CustomIcon name={CUSTOM_ICON_LIST.UK} size={CUSTOM_ICON_SIZES.LARGE} />
 
                     </View>
                 </View>
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Theme:</Text>
+                    <Text style={styles.sectionTitle}>{translate("PAGES.SETTINGS.SECTION_TITLES.THEME")}:</Text>
                     <View style={styles.lang}>
                         <Icon name='light-down' size={30} />
                         <Switch 
@@ -57,7 +75,7 @@ function Settings(): JSX.Element {
                         bgColor={BASE_COLORS.black}
                         width={BUTTON_SİZE.medium}
                         textColor={BASE_COLORS.white}
-                        text="Edit Home Page"
+                        text={translate("COMPONENTS.BUTTON.TITLES.EDIT_HOME_PAGE")}
                         onPress={toogleModal}
                     />
                 </View>

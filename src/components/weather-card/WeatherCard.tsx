@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 // Import Utils
 import { getCity } from '../../common/utils/getCity';
 import { formatCityName } from '../../common/utils/formatCityName';
+import { translate } from '../../common/utils/translate';
 
 // Import Api
 import { useGetWeatherByCityQuery } from '../../api/weather';
@@ -61,7 +62,7 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
     if(error) {
         return (
             <View style={styles.container}>
-                <Text style={styles.errorMessage}>An error has occured! Please refresh the page</Text>
+                <Text style={styles.errorMessage}>{translate("COMPONENTS.WEATHER_CARD.ERROR")}</Text>
             </View>
         )
     }
@@ -84,17 +85,17 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
             </View>
             <View style={styles.secondRow}>
                 <View style={styles.detailRow}>
-                    <Text>Min/Max: {renderOnLoading(parseInt(data?.daily[0].temp.min))}&deg; / {renderOnLoading(parseInt(data?.daily[0].temp.max))}&deg;</Text>
-                    <Text>Wind: {renderOnLoading(parseInt(data?.current.wind_speed))} km/h</Text>
+                    <Text>{translate("COMPONENTS.WEATHER_CARD.MIN_MAX")}: {renderOnLoading(parseInt(data?.daily[0].temp.min))}&deg; / {renderOnLoading(parseInt(data?.daily[0].temp.max))}&deg;</Text>
+                    <Text>{translate("COMPONENTS.WEATHER_CARD.WIND")}: {renderOnLoading(parseInt(data?.current.wind_speed))} km/h</Text>
                 </View>
                 <View style={styles.detailRow}>
-                    <Text>Humidity: %{renderOnLoading(data?.current.humidity)}</Text>
-                    <Text>Feels Like: {renderOnLoading(parseInt(data?.current.feels_like))}&deg;</Text>
+                    <Text>{translate("COMPONENTS.WEATHER_CARD.HUMIDITY")}: %{renderOnLoading(data?.current.humidity)}</Text>
+                    <Text>{translate("COMPONENTS.WEATHER_CARD.FEELS_LIKE")}: {renderOnLoading(parseInt(data?.current.feels_like))}&deg;</Text>
                 </View>
             </View>
             <View>
                 <TouchableOpacity style={styles.details} onPress={navigatetoDetails}>
-                    <Text style={styles.linkText}>Show more</Text>
+                    <Text style={styles.linkText}>{translate("COMPONENTS.WEATHER_CARD.SHOW_MORE")}</Text>
                     <Icon name='arrow-long-right' size={20} />
                 </TouchableOpacity>
             </View>

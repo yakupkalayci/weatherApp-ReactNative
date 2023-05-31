@@ -11,6 +11,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { routes } from './router/routes';
 
+// Import i18n
+import { withTranslation } from 'react-i18next';
+
 // Import Layout
 import Layout from './layout/Layout';
 
@@ -43,4 +46,4 @@ function App(): JSX.Element {
 }
 
 
-export default App;
+export default withTranslation()(App);

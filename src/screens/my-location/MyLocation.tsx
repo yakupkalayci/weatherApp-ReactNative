@@ -13,6 +13,7 @@ import { useGetWeatherByCityQuery } from "../../api/weather";
 
 // Import Utils
 import { getCityFromCoordinates } from "../../common/utils/getCityFromCoordinates";
+import { translate } from "../../common/utils/translate";
 
 // Import Components
 import WeatherDetailsContainer from "../../components/weather-details-container/WeatherDetailsContainer";
@@ -56,14 +57,14 @@ function MyLocation(): JSX.Element {
             style={styles.container}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
-            <Text onPress={() => navigation.navigate('map')} style={styles.headerLink}>Choose on map</Text>
+            <Text onPress={() => navigation.navigate('map')} style={styles.headerLink}>{translate("COMPONENTS.BUTTON.TITLES.CHOOSE_ON_MAP")}</Text>
             {
                 isLoading ? (
-                    <Text>Loading..</Text>
+                    <Text>{translate("PAGES.LOCATION.MESSAGES.LOADING")}</Text>
                 ) :
                 error ? (
                     <>
-                        <Text>An error has occured! To allow the location service may resolve this.</Text>
+                        <Text>{translate("PAGES.LOCATION.MESSAGES.ERROR")}</Text>
                     </>
                 ) : (
                     <>

@@ -7,6 +7,9 @@ import { useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { footerMenu } from '../../router/footerMenu';
 
+// Import Utils
+import { translate } from '../../common/utils/translate';
+
 // Import Vector Icons
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -37,7 +40,7 @@ function Footer(): JSX.Element {
                                         : item.navigateKey === 'location' ? <MaterialIcon name='location-on' size={25} color='#fff' />
                                         : null
                         }
-                        <Text style={route.name === item.navigateKey ? [styles.menuItem, { fontWeight: 'bold' }] : styles.menuItem}>{item.title}</Text>
+                        <Text style={route.name === item.navigateKey ? [styles.menuItem, { fontWeight: 'bold' }] : styles.menuItem}>{translate(`MENU.${item.navigateKey.toUpperCase()}`)}</Text>
                     </Pressable>
                 ))
             }
