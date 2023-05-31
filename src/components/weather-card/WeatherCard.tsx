@@ -1,6 +1,7 @@
 // Import React
-import { useEffect } from 'react';
 import { Text, TouchableOpacity, View, Image } from 'react-native';
+
+import Animated, { LightSpeedInLeft, Layout } from 'react-native-reanimated';
 
 // Import React-Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -60,13 +61,17 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
     if(error) {
         return (
             <View style={styles.container}>
-                <Text>An error has occured! Please refresh the page</Text>
+                <Text style={styles.errorMessage}>An error has occured! Please refresh the page</Text>
             </View>
         )
     }
 
     return (
-        <View style={styles.container}>
+        <Animated.View 
+            entering={LightSpeedInLeft} 
+            layout={Layout.springify()}
+            style={styles.container}
+        >
             <View style={styles.firstRow}>
                 <View style={styles.cityNameContainer}>
                     <Text style={[styles.bigText, styles.cityName]}>{cityName ? formatCityName(cityName) : extraName}</Text>
@@ -93,7 +98,7 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
                     <Icon name='arrow-long-right' size={20} />
                 </TouchableOpacity>
             </View>
-        </View>
+        </Animated.View>
     )
 }
 

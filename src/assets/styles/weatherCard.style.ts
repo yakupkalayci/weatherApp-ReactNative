@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { BASE_COLORS } from "../../common/constants/baseColors";
 
 export default StyleSheet.create({
     container: {
@@ -26,7 +27,7 @@ export default StyleSheet.create({
     bigText: {
         fontSize: 21,
         fontWeight: 'bold',
-        color: '#fff'
+        color: BASE_COLORS.black
     },
     details: {
         flexDirection: 'row',
@@ -40,7 +41,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     cityName: {
-        color: '#000',
+        color: BASE_COLORS.black,
         paddingRight: 10
     },
     weatherContainer: {
@@ -55,5 +56,8 @@ export default StyleSheet.create({
         marginRight: 10,
         fontWeight: 'bold',
         fontStyle: 'italic'
+    },
+    errorMessage: {
+        color: BASE_COLORS.black
     }
 });

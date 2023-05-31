@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { BASE_COLORS } from "../../common/constants/baseColors";
 
 export default StyleSheet.create({
     container: {
@@ -9,6 +10,7 @@ export default StyleSheet.create({
         paddingRight: 10,
         marginBottom: 10,
         fontWeight: 'bold',
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        color: BASE_COLORS.black
     }
 });

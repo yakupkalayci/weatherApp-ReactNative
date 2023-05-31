@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { BASE_COLORS } from "../../common/constants/baseColors";
 
 export default StyleSheet.create({
     container: {
@@ -26,6 +27,7 @@ export default StyleSheet.create({
     sectionTitle: {
         alignSelf: 'flex-start',
         fontStyle: 'italic',
-        paddingBottom: 25
+        paddingBottom: 25,
+        color: BASE_COLORS.black
     }
 });
