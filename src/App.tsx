@@ -26,7 +26,7 @@ function App(): JSX.Element {
     <Provider store={store}>
       <PersistGate persistor={persistor} >
         <NavigationContainer>
-          <Stack.Navigator screenOptions={{headerShown:true}}>
+          <Stack.Navigator>
             {
               routes.map(({key, Component, showHeader}) => (
                 <Stack.Screen name={key} key={key} options={{headerShown: showHeader}} >

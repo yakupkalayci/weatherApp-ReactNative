@@ -1,7 +1,16 @@
+// Import React-Native
 import { StyleSheet } from "react-native";
+
+// Import Themes
+import { darkMode } from "../../common/theme/darkMode";
+import { lightMode } from "../../common/theme/lightMode";
+
 import { BASE_COLORS } from "../../common/constants/baseColors";
 
-export default StyleSheet.create({
+// Import Types
+import { Themes } from "../../common/theme/type";
+
+export const customStyles = (theme:Themes) => StyleSheet.create({
     container: {
         minWidth: '80%',
         backgroundColor: '#0984e3',
@@ -27,7 +36,7 @@ export default StyleSheet.create({
     bigText: {
         fontSize: 21,
         fontWeight: 'bold',
-        color: BASE_COLORS.black
+        color: lightMode.primaryText
     },
     details: {
         flexDirection: 'row',
@@ -41,8 +50,10 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     cityName: {
-        color: BASE_COLORS.black,
         paddingRight: 10
+    },
+    temp: {
+        color: theme === 'dark' ? darkMode.primaryText : lightMode.secondaryText
     },
     weatherContainer: {
         alignItems: 'center', 

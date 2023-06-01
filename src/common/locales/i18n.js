@@ -1,5 +1,5 @@
-// Import React
-import {NativeModules} from 'react-native';
+// Import React-Native-Localize
+import { getLocales } from 'react-native-localize';
 
 // Import i18n
 import i18n from 'i18next';
@@ -9,12 +9,11 @@ import {initReactI18next} from 'react-i18next';
 import en from './en/translation.json';
 import tr from './tr/translation.json';
 
-const currentDeviceLanguage =
-  NativeModules?.RNLocalize?.initialConstants?.locales?.[0]?.languageCode === 'tr' ? 'tr' : 'en';
+const currentDeviceLanguage = getLocales();
 
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v3',
-  lng: currentDeviceLanguage,
+  lng: currentDeviceLanguage[0].languageTag,
   fallbackLng: currentDeviceLanguage,
   resources: {
     tr: {translation: tr},

@@ -2,13 +2,24 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
+// Import Store
+import { useAppSelector } from '../../store/hooks';
+
+import { darkMode } from '../../common/theme/darkMode';
+import { lightMode } from '../../common/theme/lightMode';
+
 // Import react-native-svg
 import Svg, { Defs, Rect, LinearGradient, Stop } from 'react-native-svg';
 
-const FROM_COLOR = 'rgb(255, 255, 255)';
-const TO_COLOR = 'rgb(52, 235, 165)';
-
 const Background = ({ children }) => {
+
+    // Store Variables
+    const theme = useAppSelector(state => state.weather.theme);
+
+    // Color Variables
+    const FROM_COLOR = theme === 'dark' ? darkMode.backgroundFromColor : lightMode.backgroundFromColor;
+    const TO_COLOR = theme === 'dark' ? darkMode.backgroundToColor : lightMode.backgroundToColor;    
+
     return (
         <View style={ { flex: 1 } }>
             <Svg height="100%" width="100%" style={ StyleSheet.absoluteFillObject }>

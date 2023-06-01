@@ -1,6 +1,10 @@
 // Import React
 import { View, Text, FlatList } from "react-native"
 
+// Import Store
+import { selectTheme } from "../../../store/reducers/weatherReducer";
+import { useAppSelector } from "../../../store/hooks";
+
 // Import Utils
 import { getDay } from "../../../common/utils/getDay";
 import { translate } from "../../../common/utils/translate";
@@ -8,19 +12,21 @@ import { translate } from "../../../common/utils/translate";
 // Import Components
 import Card from './Card';
 
+import {customStyles} from '../../../assets/styles/weatherDetailsContainer.style';
+
 interface ITimelyProps {
     title: string;
     data: any;
 }
-
-import styles from '../../../assets/styles/weatherDetailsContainer.style';
-
 
 function Timely(props: ITimelyProps): JSX.Element {
 
     // destruct props
     const { title, data } = props;    
 
+    // variables
+    const theme = useAppSelector(selectTheme);
+    const styles = customStyles(theme);
 
     return (
         <View style={styles.timely}>

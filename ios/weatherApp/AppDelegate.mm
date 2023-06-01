@@ -8,7 +8,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  NSString *apiUrl = [RNCConfig envFor:@"MAP_API_KEY"];
+  NSString *apiUrl = [RNCConfig envFor:@"G_MAP_API_KEY_IOS"];
   [GMSServices provideAPIKey:apiUrl];
   self.moduleName = @"weatherApp";
   // You can add your custom initial props in the dictionary below.

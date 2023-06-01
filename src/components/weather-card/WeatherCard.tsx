@@ -1,6 +1,11 @@
 // Import React
 import { Text, TouchableOpacity, View, Image } from 'react-native';
 
+// Import Store
+import { useAppSelector } from '../../store/hooks';
+import { selectTheme } from '../../store/reducers/weatherReducer';
+
+// Import Reanimated
 import Animated, { LightSpeedInLeft, Layout } from 'react-native-reanimated';
 
 // Import React-Navigation
@@ -18,7 +23,7 @@ import { useGetWeatherByCityQuery } from '../../api/weather';
 import Icon from 'react-native-vector-icons/Entypo'
 
 // styles
-import styles from '../../assets/styles/weatherCard.style';
+import {customStyles} from '../../assets/styles/weatherCard.style';
 
 interface IWeatherCardProps {
     cityName?: string;
@@ -29,6 +34,10 @@ interface IWeatherCardProps {
 function WeatherCard(props: IWeatherCardProps): JSX.Element {
     // destruct props
     const { cityName, cityCoord, extraName } = props;
+
+    // variables
+    const theme = useAppSelector(selectTheme);
+    const styles = customStyles(theme);
 
     let exp;
 
@@ -76,7 +85,7 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
             <View style={styles.firstRow}>
                 <View style={styles.cityNameContainer}>
                     <Text style={[styles.bigText, styles.cityName]}>{cityName ? formatCityName(cityName) : extraName}</Text>
-                    <Text style={styles.bigText}>{renderOnLoading(parseInt(data?.current.temp))}&deg;</Text>
+                    <Text style={[styles.bigText, styles.temp]}>{renderOnLoading(parseInt(data?.current.temp))}&deg;</Text>
                 </View>
                 <View style={styles.weatherContainer}>
                     <Image style={styles.icon} source={{ uri: `https://openweathermap.org/img/wn/${data?.current.weather[0].icon}@2x.png` }} />

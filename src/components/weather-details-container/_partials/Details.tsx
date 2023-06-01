@@ -1,6 +1,10 @@
 // Import React
 import { View, Text } from "react-native"
 
+// Import Store
+import { selectTheme } from "../../../store/reducers/weatherReducer";
+import { useAppSelector } from "../../../store/hooks";
+
 // Import Utils
 import { translate } from "../../../common/utils/translate";
 
@@ -12,7 +16,7 @@ interface IDetailsProps {
     max: string;
 }
 
-import styles from '../../../assets/styles/weatherDetailsContainer.style';
+import {customStyles} from '../../../assets/styles/weatherDetailsContainer.style';
 
 
 function Details(props: IDetailsProps): JSX.Element {
@@ -20,23 +24,27 @@ function Details(props: IDetailsProps): JSX.Element {
     // destruct props
     const { humidity, wind_speed, feels_like, min, max } = props;
 
+    // variables
+    const theme = useAppSelector(selectTheme);
+    const styles = customStyles(theme);
+
     return (
         <View style={styles.details}>
             <View style={styles.detailRow}>
-                <Text>{translate("COMPONENTS.WEATHER_CARD.HUMIDITY")}:</Text>
-                <Text>%{humidity}</Text>
+                <Text style={styles.detailText}>{translate("COMPONENTS.WEATHER_CARD.HUMIDITY")}:</Text>
+                <Text style={styles.detailText}>%{humidity}</Text>
             </View>
             <View style={styles.detailRow}>
-                <Text>{translate("COMPONENTS.WEATHER_CARD.WIND")}</Text>
-                <Text>{parseInt(wind_speed)} km/h</Text>
+                <Text style={styles.detailText}>{translate("COMPONENTS.WEATHER_CARD.WIND")}</Text>
+                <Text style={styles.detailText}>{parseInt(wind_speed)} km/h</Text>
             </View>
             <View style={styles.detailRow}>
-                <Text>{translate("COMPONENTS.WEATHER_CARD.FEELS_LIKE")}</Text>
-                <Text>{parseInt(feels_like)}&deg;C</Text>
+                <Text style={styles.detailText}>{translate("COMPONENTS.WEATHER_CARD.FEELS_LIKE")}</Text>
+                <Text style={styles.detailText}>{parseInt(feels_like)}&deg;C</Text>
             </View>
             <View style={styles.detailRow}>
-                <Text>{translate("COMPONENTS.WEATHER_CARD.MIN_MAX")}</Text>
-                <Text>{parseInt(min)}&deg;C / {parseInt(max)}&deg;C</Text>
+                <Text style={styles.detailText}>{translate("COMPONENTS.WEATHER_CARD.MIN_MAX")}</Text>
+                <Text style={styles.detailText}>{parseInt(min)}&deg;C / {parseInt(max)}&deg;C</Text>
             </View>
         </View>
     )

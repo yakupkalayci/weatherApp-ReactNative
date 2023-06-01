@@ -6,5 +6,7 @@ export enum BASE_COLORS  {
     green = "green",
     brown = "brown",
     gray = "gray",
-    white = "white"
+    white = "white",
+    lightGray = "lightgray",
+    darkGray = "darkgray"
 }

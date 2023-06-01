@@ -2,6 +2,10 @@
 import { useEffect, useState } from "react";
 import { View, Switch, Text } from "react-native";
 
+// Import Store
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { changeStoreTheme, changeStoreLang } from "../../store/reducers/weatherReducer";
+
 // Import i18n
 import i18n from "../../common/locales/i18n";
 
@@ -24,26 +28,39 @@ import styles from '../../assets/styles/settings.style';
 
 function Settings(): JSX.Element {
 
+    // store variables
+    const dispatch = useAppDispatch();
+    const storeTheme = useAppSelector(state => state.weather.theme);
+    const storeLang = useAppSelector(state => state.weather.lang);
+
     // states
     const [editModal, setEditModal] = useState(false);
     const [lang, setLang] = useState<boolean>();
-    const [theme, setTheme] = useState(false);
+    const [theme, setTheme] = useState<boolean>();
 
     // method for open and close EditCities Modal
     const toogleModal = () => {
         setEditModal(!editModal);
     }
 
-    // method for changing app language
+    // method for changing app language and theme
     const changeLang = () => setLang(prev => !prev);
+    const changeTheme = () => setTheme(prev => !prev);
 
+    // useEffect
     useEffect(() => {
-        setLang(i18n.language === 'en');
+        setLang(storeLang === 'en');
+        setTheme(storeTheme === 'light');
     }, []);
 
     useEffect(() => {
         i18n.changeLanguage(i18n.language === 'en' ? 'tr' : 'en');
+        dispatch(changeStoreLang(lang ? 'en' : 'tr'));
     }, [lang]);
+
+    useEffect(() => {
+        dispatch(changeStoreTheme(theme ? 'light' : 'dark'));
+    }, [theme]);
 
     return (
         <View style={styles.container}>
@@ -66,6 +83,7 @@ function Settings(): JSX.Element {
                         <Icon name='light-down' size={30} />
                         <Switch 
                             value={theme}
+                            onValueChange={() => changeTheme()}
                         />
                         <Icon name='light-up' size={30} />
                     </View>

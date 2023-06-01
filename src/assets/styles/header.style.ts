@@ -1,7 +1,14 @@
+// Import React Native
 import { StyleSheet } from "react-native";
-import { BASE_COLORS } from "../../common/constants/baseColors";
 
-export default StyleSheet.create({
+// Import Themes
+import { darkMode } from "../../common/theme/darkMode";
+import { lightMode } from "../../common/theme/lightMode";
+
+// Import Types
+import { Themes } from "../../common/theme/type";
+
+export const customStyles = (theme:Themes) => StyleSheet.create({
     header: {
         padding: 10,
         flexDirection: 'row',
@@ -11,12 +18,12 @@ export default StyleSheet.create({
     heading: {
         fontWeight: "900",
         fontSize: 50,
-        color: BASE_COLORS.black
+        color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
     },
     subHeader: {
         paddingTop: 10,
         fontSize: 18,
-        color: BASE_COLORS.black
+        color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
     },
     leftHeader: {
         flexDirection: 'row',
@@ -24,6 +31,6 @@ export default StyleSheet.create({
     },
     routeName: {
         fontStyle: 'italic',
-        color: BASE_COLORS.black
+        color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
     }
 })

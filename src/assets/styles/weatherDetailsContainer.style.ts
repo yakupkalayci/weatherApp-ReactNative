@@ -1,6 +1,14 @@
+// Import React Native
 import { StyleSheet } from "react-native";
 
-export default StyleSheet.create({
+// Import Themes
+import { darkMode } from "../../common/theme/darkMode";
+import { lightMode } from "../../common/theme/lightMode";
+
+// Import Types
+import { Themes } from "../../common/theme/type";
+
+export const customStyles = (theme:Themes) => StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -8,7 +16,8 @@ export default StyleSheet.create({
     },
     heading: {
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
     },
     description: {
         alignItems: 'center',
@@ -20,7 +29,7 @@ export default StyleSheet.create({
         marginBottom: 17
     },
     details: {
-        backgroundColor: '#f7f7f7',
+        backgroundColor: theme === 'dark' ? darkMode.backgroundColor : lightMode.backgroundColor,
         borderRadius: 10,
         marginHorizontal: 40,
         padding: 20
@@ -32,11 +41,14 @@ export default StyleSheet.create({
         borderBottomWidth: 0.3,
         padding: 15
     },
+    detailText: {
+        color: theme === 'dark' ? darkMode.secondaryText : lightMode.primaryText
+    },
     sectionHeading: {
         marginBottom: 20
     },
     timely: {
-        backgroundColor: '#f7f7f7',
+        backgroundColor: theme === 'dark' ? darkMode.backgroundColor : lightMode.backgroundColor,
         borderRadius: 10,
         marginVertical: 20,
         marginHorizontal: 10,
@@ -44,7 +56,7 @@ export default StyleSheet.create({
     },
     cardContainer: {
         alignItems: 'center', 
-        backgroundColor: 'rgb(63, 209, 153)', 
+        backgroundColor: theme === 'dark' ? darkMode.timelyCardBackgroundColor : lightMode.timelyCardBackgroundColor,
         marginRight: 15, 
         borderRadius: 30, 
         paddingVertical: 10

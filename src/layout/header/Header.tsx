@@ -1,6 +1,10 @@
 // Import React
 import { View, Text } from 'react-native';
 
+// Import Store
+import { selectTheme } from '../../store/reducers/weatherReducer';
+import { useAppSelector } from '../../store/hooks';
+
 // Import React Navigation
 import { useRoute } from '@react-navigation/native';
 
@@ -9,13 +13,14 @@ import { translate } from '../../common/utils/translate';
 import { getRouteName } from '../../common/utils/getRouteName';
 
 // styles
-import styles from '../../assets/styles/header.style';
+import {customStyles} from '../../assets/styles/header.style';
 
 function Header(): JSX.Element {
 
     // variables
     const route = useRoute();
-    
+    const theme = useAppSelector(selectTheme);
+    const styles = customStyles(theme);
 
     return (
         <View style={styles.header}>
