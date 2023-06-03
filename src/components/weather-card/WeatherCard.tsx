@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getCity } from '../../common/utils/getCity';
 import { formatCityName } from '../../common/utils/formatCityName';
 import { translate } from '../../common/utils/translate';
+import { translateWeatherCondidition } from '../../common/utils/translateWeatherCondition';
 
 // Import Api
 import { useGetWeatherByCityQuery } from '../../api/weather';
@@ -29,11 +30,12 @@ interface IWeatherCardProps {
     cityName?: string;
     cityCoord?: object;
     extraName?: string;
+    lang: string;
 }
 
 function WeatherCard(props: IWeatherCardProps): JSX.Element {
     // destruct props
-    const { cityName, cityCoord, extraName } = props;
+    const { cityName, cityCoord, extraName, lang } = props;
 
     // variables
     const theme = useAppSelector(selectTheme);
@@ -47,12 +49,14 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
     else if (cityCoord) {
         exp = cityCoord;
     }
+    exp.lang = lang;
 
     // Navigation Variables
     const navigation = useNavigation();
 
     // Query Variables
-    const { data, error, isLoading } = useGetWeatherByCityQuery(exp);
+    const { data, error, isLoading } = useGetWeatherByCityQuery(exp, {refetchOnMountOrArgChange:true});
+    
 
     // method for navigating to details screen
     const navigatetoDetails = () => {
@@ -60,7 +64,7 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
     }
 
     // method for displaying loading indicator while data is loading instead of NaN
-    const renderOnLoading = (data:number|string) => {
+    const renderOnLoading = (data:any) => {
         if(isLoading) {
             return '...'
         } else {
@@ -89,7 +93,7 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
                 </View>
                 <View style={styles.weatherContainer}>
                     <Image style={styles.icon} source={{ uri: `https://openweathermap.org/img/wn/${data?.current.weather[0].icon}@2x.png` }} />
-                    <Text style={styles.bigText}>{renderOnLoading(data?.current.weather[0].main)}</Text>
+                    <Text style={styles.bigText}>{translateWeatherCondidition(renderOnLoading(data?.current.weather[0].main), lang)}</Text>
                 </View>
             </View>
             <View style={styles.secondRow}>

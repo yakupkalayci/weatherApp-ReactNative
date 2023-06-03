@@ -16,7 +16,7 @@ import { Themes } from "../../common/theme/type";
 interface IInitalState {
     myCities: string[];
     theme: Themes,
-    lang: string
+    lang: 'en'|'tr'
 }
 
 const initialState:IInitalState = {

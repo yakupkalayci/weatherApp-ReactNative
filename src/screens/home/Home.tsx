@@ -14,6 +14,10 @@ import styles from '../../assets/styles/home.style';
 function Home(): JSX.Element {
     // useState
     const [refreshing, setRefreshing] = useState(false);
+    
+    // variables
+    const myCities = useAppSelector(state => state.weather.myCities);
+    const lang = useAppSelector(state => state.weather.lang);
 
     // refresh method
     const onRefresh = useCallback(() => {
@@ -23,8 +27,6 @@ function Home(): JSX.Element {
         }, 2000);
     }, []);
 
-    // variables
-    const myCities = useAppSelector(state => state.weather.myCities);
 
     return (
         <ScrollView
@@ -33,7 +35,7 @@ function Home(): JSX.Element {
         >
             {
                 myCities?.map((city, index) => (
-                    <WeatherCard key={index} cityName={city} />
+                    <WeatherCard key={index} cityName={city} lang={lang} />
                 ))
             }
         </ScrollView>
