@@ -8,16 +8,16 @@ import { useAppSelector } from "../../../store/hooks";
 // Import Utils
 import { translate } from "../../../common/utils/translate";
 
-interface IDetailsProps {
-    humidity: string;
-    wind_speed: string;
-    feels_like: string;
-    min: string;
-    max: string;
-}
-
+// Import Styles
 import {customStyles} from '../../../assets/styles/weatherDetailsContainer.style';
 
+interface IDetailsProps {
+    humidity: number;
+    wind_speed: number;
+    feels_like: number;
+    min: number;
+    max: number;
+}
 
 function Details(props: IDetailsProps): JSX.Element {
 
@@ -36,15 +36,15 @@ function Details(props: IDetailsProps): JSX.Element {
             </View>
             <View style={styles.detailRow}>
                 <Text style={styles.detailText}>{translate("COMPONENTS.WEATHER_CARD.WIND")}</Text>
-                <Text style={styles.detailText}>{parseInt(wind_speed)} km/h</Text>
+                <Text style={styles.detailText}>{parseInt(wind_speed.toString())} km/h</Text>
             </View>
             <View style={styles.detailRow}>
                 <Text style={styles.detailText}>{translate("COMPONENTS.WEATHER_CARD.FEELS_LIKE")}</Text>
-                <Text style={styles.detailText}>{parseInt(feels_like)}&deg;C</Text>
+                <Text style={styles.detailText}>{parseInt(feels_like.toString())}&deg;C</Text>
             </View>
             <View style={styles.detailRow}>
                 <Text style={styles.detailText}>{translate("COMPONENTS.WEATHER_CARD.MIN_MAX")}</Text>
-                <Text style={styles.detailText}>{parseInt(min)}&deg;C / {parseInt(max)}&deg;C</Text>
+                <Text style={styles.detailText}>{parseInt(min.toString())}&deg;C / {parseInt(max.toString())}&deg;C</Text>
             </View>
         </View>
     )

@@ -2,9 +2,6 @@
 import { useState, useCallback } from "react";
 import { View, FlatList, RefreshControl } from "react-native";
 
-// Import Store
-import { useAppSelector } from "../../store/hooks";
-
 // Components
 import WeatherCard from "../../components/weather-card/WeatherCard";
 
@@ -19,9 +16,6 @@ function Cities(): JSX.Element {
     // useState
     const [refreshing, setRefreshing] = useState(false);
 
-    // variables
-    const lang = useAppSelector(state => state.weather.lang);
-
     // refresh method
     const onRefresh = useCallback(() => {
         setRefreshing(true);
@@ -30,12 +24,17 @@ function Cities(): JSX.Element {
         }, 2000);
     }, []);
 
+    // renderitem method
+    const renderItem = ({item}) => {
+        return <WeatherCard cityName={item.name} />
+    }
+
     return (
         <View style={styles.container}>
             <FlatList
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                 data={cities}
-                renderItem={({ item }) => <WeatherCard cityName={item.name} lang={lang} />}
+                renderItem={renderItem}
                 keyExtractor={item => item.plaka.toString()}
             />
         </View>

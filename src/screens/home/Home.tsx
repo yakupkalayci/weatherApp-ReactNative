@@ -17,7 +17,6 @@ function Home(): JSX.Element {
     
     // variables
     const myCities = useAppSelector(state => state.weather.myCities);
-    const lang = useAppSelector(state => state.weather.lang);
 
     // refresh method
     const onRefresh = useCallback(() => {
@@ -35,7 +34,7 @@ function Home(): JSX.Element {
         >
             {
                 myCities?.map((city, index) => (
-                    <WeatherCard key={index} cityName={city} lang={lang} />
+                    <WeatherCard key={index} cityName={city}/>
                 ))
             }
         </ScrollView>

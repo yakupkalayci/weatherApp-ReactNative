@@ -7,6 +7,7 @@ import { useRoute } from "@react-navigation/native";
 // Import Components
 import WeatherDetailsContainer from "../../components/weather-details-container/WeatherDetailsContainer";
 
+// Import Styles
 import styles from '../../assets/styles/weatherDetails.style';
 
 function WeatherDetails(): JSX.Element {

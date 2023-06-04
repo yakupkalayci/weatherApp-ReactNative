@@ -10,9 +10,8 @@ import { useNavigation } from "@react-navigation/native";
 
 // Import API
 import { useGetWeatherByCityQuery } from "../../api/weather";
+import { getCityLocationFromCoordinates } from "../../api/location";
 
-// Import Utils
-import { getCityFromCoordinates } from "../../common/utils/getCityFromCoordinates";
 import { translate } from "../../common/utils/translate";
 
 // Import Components
@@ -47,7 +46,7 @@ function MyLocation(): JSX.Element {
     }, []);
 
     useEffect(() => {
-        getCityFromCoordinates(location?.coords.latitude, location?.coords.longitude)
+        getCityLocationFromCoordinates(location?.coords.latitude, location?.coords.longitude)
             .then(data => setCity(data.address))
             .catch(err => console.log(err));
     }, [location]);

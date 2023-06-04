@@ -1,5 +1,5 @@
 // Import React
-import { Text, TouchableOpacity, View, Image } from 'react-native';
+import { Text, View } from 'react-native';
 
 // Import Store
 import { useAppSelector } from '../../store/hooks';
@@ -15,13 +15,20 @@ import { useNavigation } from '@react-navigation/native';
 import { getCity } from '../../common/utils/getCity';
 import { formatCityName } from '../../common/utils/formatCityName';
 import { translate } from '../../common/utils/translate';
-import { translateWeatherCondidition } from '../../common/utils/translateWeatherCondition';
 
 // Import Api
 import { useGetWeatherByCityQuery } from '../../api/weather';
 
-// Import Vector Icons
-import Icon from 'react-native-vector-icons/Entypo'
+// Import Types
+import { WeatherDataType } from '../../common/types/weatherData';
+
+// Import Constants
+import { WEATHER_CONDITIONS } from '../../common/constants/weatherConditions';
+
+// Import Partials
+import FirstRow from './_partials/FirstRow';
+import SecondRow from './_partials/SecondRow';
+import ActionButton from './_partials/ActionButton';
 
 // styles
 import {customStyles} from '../../assets/styles/weatherCard.style';
@@ -30,15 +37,15 @@ interface IWeatherCardProps {
     cityName?: string;
     cityCoord?: object;
     extraName?: string;
-    lang: string;
 }
 
 function WeatherCard(props: IWeatherCardProps): JSX.Element {
     // destruct props
-    const { cityName, cityCoord, extraName, lang } = props;
+    const { cityName, cityCoord, extraName } = props;
 
     // variables
     const theme = useAppSelector(selectTheme);
+    const lang = useAppSelector(state => state.weather.lang);
     const styles = customStyles(theme);
 
     let exp;
@@ -49,13 +56,12 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
     else if (cityCoord) {
         exp = cityCoord;
     }
-    exp.lang = lang;
 
     // Navigation Variables
     const navigation = useNavigation();
 
     // Query Variables
-    const { data, error, isLoading } = useGetWeatherByCityQuery(exp, {refetchOnMountOrArgChange:true});
+    const { data, error, isLoading } = useGetWeatherByCityQuery(exp);
     
 
     // method for navigating to details screen
@@ -64,7 +70,7 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
     }
 
     // method for displaying loading indicator while data is loading instead of NaN
-    const renderOnLoading = (data:any) => {
+    const renderOnLoading = (data:any): any | '...' => {
         if(isLoading) {
             return '...'
         } else {
@@ -86,32 +92,9 @@ function WeatherCard(props: IWeatherCardProps): JSX.Element {
             layout={Layout.springify()}
             style={styles.container}
         >
-            <View style={styles.firstRow}>
-                <View style={styles.cityNameContainer}>
-                    <Text style={[styles.bigText, styles.cityName]}>{cityName ? formatCityName(cityName) : extraName}</Text>
-                    <Text style={[styles.bigText, styles.temp]}>{renderOnLoading(parseInt(data?.current.temp))}&deg;</Text>
-                </View>
-                <View style={styles.weatherContainer}>
-                    <Image style={styles.icon} source={{ uri: `https://openweathermap.org/img/wn/${data?.current.weather[0].icon}@2x.png` }} />
-                    <Text style={styles.bigText}>{translateWeatherCondidition(renderOnLoading(data?.current.weather[0].main), lang)}</Text>
-                </View>
-            </View>
-            <View style={styles.secondRow}>
-                <View style={styles.detailRow}>
-                    <Text>{translate("COMPONENTS.WEATHER_CARD.MIN_MAX")}: {renderOnLoading(parseInt(data?.daily[0].temp.min))}&deg; / {renderOnLoading(parseInt(data?.daily[0].temp.max))}&deg;</Text>
-                    <Text>{translate("COMPONENTS.WEATHER_CARD.WIND")}: {renderOnLoading(parseInt(data?.current.wind_speed))} km/h</Text>
-                </View>
-                <View style={styles.detailRow}>
-                    <Text>{translate("COMPONENTS.WEATHER_CARD.HUMIDITY")}: %{renderOnLoading(data?.current.humidity)}</Text>
-                    <Text>{translate("COMPONENTS.WEATHER_CARD.FEELS_LIKE")}: {renderOnLoading(parseInt(data?.current.feels_like))}&deg;</Text>
-                </View>
-            </View>
-            <View>
-                <TouchableOpacity style={styles.details} onPress={navigatetoDetails}>
-                    <Text style={styles.linkText}>{translate("COMPONENTS.WEATHER_CARD.SHOW_MORE")}</Text>
-                    <Icon name='arrow-long-right' size={20} />
-                </TouchableOpacity>
-            </View>
+            <FirstRow data={data} lang={lang} renderOnLoading={renderOnLoading} cityName={cityName} extraName={extraName} styles={styles} />
+            <SecondRow data={data} renderOnLoading={renderOnLoading} styles={styles} />
+            <ActionButton onPress={navigatetoDetails} styles={styles} />
         </Animated.View>
     )
 }

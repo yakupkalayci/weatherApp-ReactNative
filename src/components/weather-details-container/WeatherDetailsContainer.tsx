@@ -4,19 +4,21 @@ import Animated, { Layout, FadeInRight } from "react-native-reanimated";
 // Import Store
 import { useAppSelector } from "../../store/hooks";
 
+// Import Utils
+import { translate } from "../../common/utils/translate";
+
 // Import Partials
 import Header from "./_partials/Header";
 import Description from "./_partials/Description";
 import Details from "./_partials/Details";
 import Timely from "./_partials/Timely";
 
-// Import Utils
-import { translate } from "../../common/utils/translate";
-
+// Import Types
+import { WeatherDataType } from "../../common/types/weatherData";
 
 interface IWeatherDetailsContainerProps {
     city: string;
-    data: any;
+    data: WeatherDataType;
 }
 
 function WeatherDetailsContainer(props: IWeatherDetailsContainerProps): JSX.Element {

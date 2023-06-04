@@ -13,7 +13,7 @@ interface ICardProps {
     temp: string;
 }
 
-function Renderitem(props:ICardProps):JSX.Element {
+function Card(props:ICardProps):JSX.Element {
 
     // destruct props
     const {time, descriptionIcon, temp} = props;
@@ -31,4 +31,4 @@ function Renderitem(props:ICardProps):JSX.Element {
     )
 }
 
-export default Renderitem;
+export default Card;

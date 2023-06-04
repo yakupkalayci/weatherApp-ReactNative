@@ -11,8 +11,11 @@ import { useGetWeatherByCityQuery } from '../../api/weather';
 // Import Navigation
 import { useNavigation } from "@react-navigation/native";
 
-// Import utils
-import { getCityFromCoordinates } from "../../common/utils/getCityFromCoordinates";
+// Import Api
+import { getCityLocationFromCoordinates } from "../../api/location";
+
+// Import Types
+import { Location, Address } from "../../common/types/location";
 
 // Import Components
 import WeatherCard from "../../components/weather-card/WeatherCard";
@@ -22,15 +25,22 @@ import styles from '../../assets/styles/map.style'
 function Map(): JSX.Element {
     // useStates
     const [pin, setPin] = useState<LatLng>({ latitude: 0, longitude: 0 });
-    const [city, setCity] = useState();
+    const [city, setCity] = useState<Address>();
 
     // variables
     const navigation = useNavigation();
-    const { data, error, isLoading } = useGetWeatherByCityQuery({ lat: pin.latitude, long: pin.longitude });
+    const { data, error, isLoading } = useGetWeatherByCityQuery({ latitude: pin.latitude, longitude: pin.longitude });
+
+    // method for navigating to details screen
+    const navigatetoDetails = () => {
+        navigation.navigate('details', { city: city?.city || city?.province || city?.town || city?.village, data: data });
+    }
 
     // useEffects
     useEffect(() => {
-        getCityFromCoordinates(pin.latitude, pin.longitude).then(data => setCity(data.address)).catch(err => console.log(err));
+        getCityLocationFromCoordinates(pin.latitude, pin.longitude)
+            .then(data => setCity(data.address))
+            .catch(err => console.log(err));
     }, [pin]);
 
     return (
@@ -54,9 +64,9 @@ function Map(): JSX.Element {
                     draggable={true}
                     onDragEnd={(e) => setPin({ latitude: e.nativeEvent.coordinate.latitude, longitude: e.nativeEvent.coordinate.longitude })}
                 >
-                    <Callout tooltip onPress={() => navigation.navigate('details', {city: city?.city || city?.province || city?.town || city?.village,  data:data})}>
+                    <Callout tooltip onPress={() => navigatetoDetails()}>
                         <View>
-                            <WeatherCard cityCoord={pin} extraName={city?.city || city?.province || city?.town || city?.village} />
+                            <WeatherCard cityCoord={pin} extraName={city?.city || city?.province || city?.town || city?.village || city?.state || city?.country} />
                         </View>
                     </Callout>
                 </Marker>

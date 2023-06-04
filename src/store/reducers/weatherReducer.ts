@@ -1,13 +1,12 @@
 // Import ReduxToolkit
 import { createSlice } from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistReducer } from "redux-persist";
+
+// Import AsyncStorage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Import Store
 import { RootState } from "../store";
-
-// Import i18next
-import i18n from '../../common/locales/i18n';
 
 // Import Types
 import { Themes } from "../../common/theme/type";
