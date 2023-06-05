@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { Svg, Circle, G, Path } from 'react-native-svg';
+import {Svg, Circle, G, Path} from 'react-native-svg';
 
 function SvgTr(props) {
   return (
-    <Svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" {...props}>
+    <Svg
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      {...props}>
       <Circle cx={256} cy={256} fill="#d80027" r={256} />
       <G fill="#f0f0f0">
         <Path d="M245.518 209.186l21.005 28.945 34.017-11.03-21.038 28.92 21.002 28.944-34.005-11.072-21.037 28.92.022-35.761-34.006-11.072 34.018-11.03z" />

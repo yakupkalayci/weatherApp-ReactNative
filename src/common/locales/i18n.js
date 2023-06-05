@@ -1,5 +1,5 @@
 // Import React-Native-Localize
-import { getLocales } from 'react-native-localize';
+import {getLocales} from 'react-native-localize';
 
 // Import i18n
 import i18n from 'i18next';

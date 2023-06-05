@@ -5,9 +5,13 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --fix --ext .ts,.tsx ./src",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './src/**/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc.js",
+    "pod:clean": "rm -rf ios/Pods ios/Podfile.lock && cd ios && pod install && cd ..",
+    "android:clean": "cd android && ./gradlew clean && cd .."
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
@@ -22,6 +26,7 @@
     "react": "18.2.0",
     "react-i18next": "^12.3.1",
     "react-native": "0.71.3",
+    "react-native-bootsplash": "^4.7.1",
     "react-native-config": "^1.5.1",
     "react-native-localize": "^3.0.0",
     "react-native-maps": "^1.7.1",
@@ -54,5 +59,11 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

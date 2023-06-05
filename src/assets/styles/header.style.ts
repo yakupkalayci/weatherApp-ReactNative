@@ -1,36 +1,37 @@
 // Import React Native
-import { StyleSheet } from "react-native";
+import {StyleSheet, Dimensions} from 'react-native';
 
 // Import Themes
-import { darkMode } from "../../common/theme/darkMode";
-import { lightMode } from "../../common/theme/lightMode";
+import {darkMode} from '../../common/theme/darkMode';
+import {lightMode} from '../../common/theme/lightMode';
 
 // Import Types
-import { Themes } from "../../common/theme/type";
+import {Themes} from '../../common/theme/type';
 
-export const customStyles = (theme:Themes) => StyleSheet.create({
+export const customStyles = (theme: Themes) =>
+  StyleSheet.create({
     header: {
-        padding: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+      padding: Dimensions.get('window').width / 32,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     heading: {
-        fontWeight: "900",
-        fontSize: 50,
-        color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
+      fontWeight: '900',
+      fontSize: 50,
+      color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText,
     },
     subHeader: {
-        paddingTop: 10,
-        fontSize: 18,
-        color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
+      paddingTop: 10,
+      fontSize: 18,
+      color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText,
     },
     leftHeader: {
-        flexDirection: 'row',
-        alignItems: 'center'
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     routeName: {
-        fontStyle: 'italic',
-        color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
-    }
-})
+      fontStyle: 'italic',
+      color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText,
+    },
+  });
