@@ -16,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useGetWeatherByCityQuery} from '../../api/weather';
 import {getCityLocationFromCoordinates} from '../../api/location';
 
+// Import Utils
 import {translate} from '../../common/utils/translate';
 
 // Import Components
@@ -69,7 +70,7 @@ function MyLocation(): JSX.Element {
     <ScrollView
       style={styles.container}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-      <Text onPress={() => navigation.navigate('map')} style={styles.headerLink}>
+      <Text onPress={() => navigation.navigate('map', {theme:theme})} style={styles.headerLink}>
         {translate('COMPONENTS.BUTTON.TITLES.CHOOSE_ON_MAP')}
       </Text>
       {isLoading ? (

@@ -18,6 +18,9 @@ import {CUSTOM_ICON_SIZES} from '../../common/constants/icon/iconSizes';
 // Import Utils
 import {translate} from '../../common/utils/translate';
 
+// Import Partials
+import Setting from './_partials/Setting';
+
 // Import Components
 import Button from '../../components/cta/Button';
 import EditCitiesModal from '../../components/modal/EditCitiesModal';
@@ -50,7 +53,7 @@ function Settings(): JSX.Element {
   const changeLang = () => setLang(prev => !prev);
   const changeTheme = () => setTheme(prev => !prev);
 
-  // useEffect
+  // useEffects
   useEffect(() => {
     setLang(storeLang === 'en');
     setTheme(storeTheme === 'light');
@@ -68,26 +71,24 @@ function Settings(): JSX.Element {
   return (
     <View style={styles.container}>
       <View style={styles.buttons}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>
-            {translate('PAGES.SETTINGS.SECTION_TITLES.LANGUAGE')}:
-          </Text>
-          <View style={styles.lang}>
-            <CustomIcon name={CUSTOM_ICON_LIST.TR} size={CUSTOM_ICON_SIZES.LARGE} />
-            <Switch value={lang} onValueChange={() => changeLang()} />
-            <CustomIcon name={CUSTOM_ICON_LIST.UK} size={CUSTOM_ICON_SIZES.LARGE} />
-          </View>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>
-            {translate('PAGES.SETTINGS.SECTION_TITLES.THEME')}:
-          </Text>
-          <View style={styles.lang}>
-            <Icon name="light-down" size={30} />
-            <Switch value={theme} onValueChange={() => changeTheme()} />
-            <Icon name="light-up" size={30} />
-          </View>
-        </View>
+        <Setting 
+          title='PAGES.SETTINGS.SECTION_TITLES.LANGUAGE'
+          switchValue={lang}
+          onSwitchValueChange={changeLang}
+          leftIconName={CUSTOM_ICON_LIST.TR}
+          rightIconName={CUSTOM_ICON_LIST.UK}
+          styles={styles}
+          customIcon={true}
+        />
+        <Setting 
+          title='PAGES.SETTINGS.SECTION_TITLES.THEME'
+          switchValue={theme}
+          onSwitchValueChange={changeTheme}
+          leftIconName="light-down"
+          rightIconName="light-up"
+          styles={styles}
+          customIcon={false}
+        />
         <View style={styles.section}>
           <Button
             bgColor={BASE_COLORS.black}

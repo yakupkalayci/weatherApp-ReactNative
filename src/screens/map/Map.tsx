@@ -9,18 +9,22 @@ import MapView, {Marker, LatLng, Callout} from 'react-native-maps';
 import {useGetWeatherByCityQuery} from '../../api/weather';
 
 // Import Navigation
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 // Import Api
 import {getCityLocationFromCoordinates} from '../../api/location';
 
+// Import Utils
+import { translate } from '../../common/utils/translate';
+
 // Import Types
-import {Location, Address} from '../../common/types/location';
+import {Address} from '../../common/types/location';
 
 // Import Components
 import WeatherCard from '../../components/weather-card/WeatherCard';
 
-import styles from '../../assets/styles/map.style';
+// Import Styles
+import {customStyles} from '../../assets/styles/map.style';
 
 function Map(): JSX.Element {
   // useStates
@@ -29,6 +33,10 @@ function Map(): JSX.Element {
 
   // variables
   const navigation = useNavigation();
+  const route = useRoute();
+  const styles = customStyles(route.params.theme);
+
+  // API Variables
   const {data, error, isLoading} = useGetWeatherByCityQuery({
     latitude: pin.latitude,
     longitude: pin.longitude,
@@ -51,7 +59,7 @@ function Map(): JSX.Element {
 
   return (
     <View style={styles.mapContainer}>
-      <Text style={styles.infoText}>Press long to see the weather forecast of that place!</Text>
+      <Text style={styles.infoText}>{translate('PAGES.MAP.MESSAGES.PRESS_LONG_TO_SEE')}</Text>
       <MapView
         provider="google"
         zoomEnabled={true}

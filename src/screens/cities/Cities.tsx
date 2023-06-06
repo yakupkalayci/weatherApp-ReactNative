@@ -32,7 +32,7 @@ function Cities(): JSX.Element {
     <View style={styles.container}>
       <FlatList
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-        data={cities}
+        data={cities.sort((a,b) => a.name.localeCompare(b.name))}
         renderItem={renderItem}
         keyExtractor={item => item.plaka.toString()}
       />

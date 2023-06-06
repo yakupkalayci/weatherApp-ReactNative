@@ -434,7 +434,7 @@ export const cities: City[] = [
   },
   {
     plaka: 44,
-    name: 'MAlatitudeYA',
+    name: 'MALATYA',
     latitude: 38.35519,
     longitude: 38.30946,
     northeast_latitude: 38.397559,

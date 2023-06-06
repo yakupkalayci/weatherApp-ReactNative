@@ -74,6 +74,11 @@
         "LOADING": "Loading...",
         "ERROR": "An error has occured! To allow the location service may resolve this."
       }
+    },
+    "MAP": {
+      "MESSAGES": {
+        "PRESS_LONG_TO_SEE": "Press long to see the weather forecast of that place!"
+      }
     }
   }
 }

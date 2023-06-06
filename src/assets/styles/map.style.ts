@@ -1,6 +1,10 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import { Themes } from '../../common/theme/type';
+import { darkMode } from '../../common/theme/darkMode';
+import { lightMode } from '../../common/theme/lightMode';
 
-export default StyleSheet.create({
+
+export const customStyles = (theme:Themes) => StyleSheet.create({
   mapContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -15,5 +19,6 @@ export default StyleSheet.create({
     paddingLeft: 10,
     marginVertical: 10,
     fontStyle: 'italic',
+    color: theme === 'dark' ? darkMode.primaryText : lightMode.primaryText
   },
 });

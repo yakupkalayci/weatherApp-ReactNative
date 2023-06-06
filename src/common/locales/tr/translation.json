@@ -74,6 +74,11 @@
         "LOADING": "Yükleniyor...",
         "ERROR": "Bir hata meydana geldi. Konum izmi vermek sorunu giderebilir."
       }
+    },
+    "MAP": {
+      "MESSAGES": {
+        "PRESS_LONG_TO_SEE": "Hava durumu tahminini görmek için hava durumunu öğrenmek istediğiniz konuma uzun basın."
+      }
     }
   }
 }
