@@ -37,12 +37,12 @@ export const weatherSlice = createSlice({
       const index = state.myCities.indexOf(action.payload.oldCity);
       state.myCities[index] = action.payload.newCity;
     },
-    changeStoreTheme: (state, action) => {
-      const newTheme = action.payload;
+    changeStoreTheme: (state) => {
+      const newTheme = state.theme === 'light' ? 'dark' : 'light';
       state.theme = newTheme;
     },
-    changeStoreLang: (state, action) => {
-      const newLang = action.payload;
+    changeStoreLang: (state) => {
+      const newLang = state.lang === 'en' ? 'tr' : 'en';
       state.lang = newLang;
     },
   },

@@ -1,8 +1,16 @@
+// Import React
 import { View, Text, Switch } from 'react-native';
+
+// Import Utils
 import { translate } from '../../../common/utils/translate';
 
-import CustomIcon from '../../../components/icons/CustomIcon';
+// Import Vector Icons
 import Icon from 'react-native-vector-icons/Entypo';
+
+// Import Components
+import CustomIcon from '../../../components/icons/CustomIcon';
+
+// Import Constants
 import { CUSTOM_ICON_SIZES } from '../../../common/constants/icon/iconSizes';
 
 interface ISettingProps {

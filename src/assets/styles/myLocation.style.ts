@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {BASE_COLORS} from '../../common/constants/baseColors';
 import {Themes} from '../../common/theme/type';
 import { lightMode } from '../../common/theme/lightMode';
 import { darkMode } from '../../common/theme/darkMode';

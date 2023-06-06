@@ -1,19 +1,19 @@
 // Import React
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 // Import Store
-import {useAppSelector} from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 import { selectTheme } from '../../store/reducers/weatherReducer';
 
 // Import Theme
-import {darkMode} from '../../common/theme/darkMode';
-import {lightMode} from '../../common/theme/lightMode';
+import { darkMode } from '../../common/theme/darkMode';
+import { lightMode } from '../../common/theme/lightMode';
 
 // Import react-native-svg
-import Svg, {Defs, Rect, LinearGradient, Stop} from 'react-native-svg';
+import Svg, { Defs, Rect, LinearGradient, Stop } from 'react-native-svg';
 
-const Background = ({children}) => {
+const Background = ({ children }) => {
   // Store Variables
   const theme = useAppSelector(selectTheme);
 
@@ -23,7 +23,7 @@ const Background = ({children}) => {
   const TO_COLOR = theme === 'dark' ? darkMode.backgroundToColor : lightMode.backgroundToColor;
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <Svg height="100%" width="100%" style={StyleSheet.absoluteFillObject}>
         <Defs>
           <LinearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">

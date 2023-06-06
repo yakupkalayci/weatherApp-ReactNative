@@ -1,6 +1,6 @@
 // Import React
-import {useEffect, useState} from 'react';
-import {View, Switch, Text} from 'react-native';
+import {useState} from 'react';
+import {View} from 'react-native';
 
 // Import Store
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
@@ -13,7 +13,6 @@ import i18n from '../../common/locales/i18n';
 import {BUTTON_SİZE} from '../../common/constants/buttonSize';
 import {BASE_COLORS} from '../../common/constants/baseColors';
 import {CUSTOM_ICON_LIST} from '../../common/constants/icon/customIconList';
-import {CUSTOM_ICON_SIZES} from '../../common/constants/icon/iconSizes';
 
 // Import Utils
 import {translate} from '../../common/utils/translate';
@@ -24,8 +23,6 @@ import Setting from './_partials/Setting';
 // Import Components
 import Button from '../../components/cta/Button';
 import EditCitiesModal from '../../components/modal/EditCitiesModal';
-import CustomIcon from '../../components/icons/CustomIcon';
-import Icon from 'react-native-vector-icons/Entypo';
 
 // Import Styles
 import {customStyles} from '../../assets/styles/settings.style';
@@ -38,8 +35,6 @@ function Settings(): JSX.Element {
 
   // states
   const [editModal, setEditModal] = useState(false);
-  const [lang, setLang] = useState<boolean>();
-  const [theme, setTheme] = useState<boolean>();
 
   // variables
   const styles = customStyles(storeTheme);
@@ -49,31 +44,21 @@ function Settings(): JSX.Element {
     setEditModal(!editModal);
   };
 
-  // method for changing app language and theme
-  const changeLang = () => setLang(prev => !prev);
-  const changeTheme = () => setTheme(prev => !prev);
-
-  // useEffects
-  useEffect(() => {
-    setLang(storeLang === 'en');
-    setTheme(storeTheme === 'light');
-  }, []);
-
-  useEffect(() => {
+  // method for changing the app language and theme
+  const changeLang = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'tr' : 'en');
-    dispatch(changeStoreLang(lang ? 'en' : 'tr'));
-  }, [lang, dispatch]);
-
-  useEffect(() => {
-    dispatch(changeStoreTheme(theme ? 'light' : 'dark'));
-  }, [theme, dispatch]);
+    dispatch(changeStoreLang());
+  }
+  const changeTheme = () => { 
+    dispatch(changeStoreTheme());
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.buttons}>
         <Setting 
           title='PAGES.SETTINGS.SECTION_TITLES.LANGUAGE'
-          switchValue={lang}
+          switchValue={Boolean(storeLang === 'en')}
           onSwitchValueChange={changeLang}
           leftIconName={CUSTOM_ICON_LIST.TR}
           rightIconName={CUSTOM_ICON_LIST.UK}
@@ -82,10 +67,10 @@ function Settings(): JSX.Element {
         />
         <Setting 
           title='PAGES.SETTINGS.SECTION_TITLES.THEME'
-          switchValue={theme}
+          switchValue={Boolean(storeTheme === 'light')}
           onSwitchValueChange={changeTheme}
-          leftIconName="light-down"
-          rightIconName="light-up"
+          leftIconName={CUSTOM_ICON_LIST.LightDown}
+          rightIconName={CUSTOM_ICON_LIST.LightUp}
           styles={styles}
           customIcon={false}
         />

@@ -36,19 +36,19 @@ function Timely(props: ITimelyProps): JSX.Element {
     return (
       <Card
         time={
-          title === 'Hourly' || title === 'Saatlik'
+          translate(title) === 'Hourly' || title === 'Saatlik'
             ? new Date(item.dt * 1000).getHours() + ':00'
             : translate(`COMPONENTS.WEATHER_DETAILS.DAYS.${getDay(item.dt).toUpperCase()}`)
         }
         descriptionIcon={item.weather[0].icon}
-        temp={title === 'Hourly' || title === 'Saatlik' ? item.temp : item.temp.day}
+        temp={translate(title) === 'Hourly' || translate(title) === 'Saatlik' ? item.temp : item.temp.day}
       />
     );
   };
 
   return (
     <View style={styles.timely}>
-      <Text style={[styles.heading, styles.sectionHeading]}>{title}</Text>
+      <Text style={[styles.heading, styles.sectionHeading]}>{translate(title)}</Text>
       <FlatList
         data={data}
         renderItem={renderItem}

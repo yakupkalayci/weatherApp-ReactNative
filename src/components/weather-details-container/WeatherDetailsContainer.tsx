@@ -4,9 +4,6 @@ import Animated, {Layout, FadeInRight} from 'react-native-reanimated';
 // Import Store
 import {useAppSelector} from '../../store/hooks';
 
-// Import Utils
-import {translate} from '../../common/utils/translate';
-
 // Import Partials
 import Header from './_partials/Header';
 import Description from './_partials/Description';
@@ -45,11 +42,11 @@ function WeatherDetailsContainer(props: IWeatherDetailsContainerProps): JSX.Elem
         max={data?.daily[0].temp.max}
       />
       <Timely
-        title={translate('COMPONENTS.WEATHER_DETAILS.SECTION_TITLES.HOURLY')}
+        title={'COMPONENTS.WEATHER_DETAILS.SECTION_TITLES.HOURLY'}
         data={data?.hourly}
       />
       <Timely
-        title={translate('COMPONENTS.WEATHER_DETAILS.SECTION_TITLES.DAILY')}
+        title={'COMPONENTS.WEATHER_DETAILS.SECTION_TITLES.DAILY'}
         data={data?.daily}
       />
     </Animated.View>
